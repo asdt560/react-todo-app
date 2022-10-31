@@ -1,7 +1,7 @@
 import React from 'react';
 import TodoItem from './TodoItem';
 
-function TodosList(props) {
+const TodosList = (props) => {
   const propsHolder = props;
   return (
     <ul>
@@ -16,6 +16,6 @@ function TodosList(props) {
       ))}
     </ul>
   );
-}
+};
 
 export default TodosList;

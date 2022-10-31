@@ -1,60 +1,42 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import { FaPlusCircle } from 'react-icons/fa';
 
-class InputTodo extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: '',
-    };
-  }
+const InputTodo = (props) => {
+  const [title, setTitle] = useState('');
 
-  onChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
+  const onChange = (e) => {
+    setTitle(e.target.value);
   };
 
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
+    const propholder = props;
     e.preventDefault();
-    const stateHolder = this.state;
-    const propsHolder = this.props;
-    if (stateHolder.title.trim()) {
-      propsHolder.addTodoProps(stateHolder.title);
-      this.setState({
-        title: '',
-      });
+    if (title.trim()) {
+      propholder.addTodoProps(title);
+      setTitle('');
     } else {
       alert('Please write item');
     }
   };
 
-  render() {
-    const stateHolder = this.state;
-    return (
-      <form
-        className="form-container"
-        onSubmit={this.handleSubmit}
-      >
-        <input
-          name="title"
-          type="text"
-          className="input-text"
-          placeholder="Add Todo..."
-          value={stateHolder.title}
-          onChange={this.onChange}
-        />
-        <button type="submit" className="input-submit">Submit</button>
-      </form>
-    );
-  }
-}
-InputTodo.propTypes = {
-  addTodoProps: PropTypes.func,
-};
-
-InputTodo.defaultProps = {
-  addTodoProps: '',
+  return (
+    <form
+      className="form-container"
+      onSubmit={handleSubmit}
+    >
+      <input
+        name="title"
+        type="text"
+        className="input-text"
+        placeholder="Add Todo..."
+        value={title}
+        onChange={onChange}
+      />
+      <button type="submit" className="input-submit">
+        <FaPlusCircle />
+      </button>
+    </form>
+  );
 };
 
 export default InputTodo;
